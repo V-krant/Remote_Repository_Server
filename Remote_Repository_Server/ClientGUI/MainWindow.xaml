@@ -1,0 +1,301 @@
+﻿<Window x:Class="ClientGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientGUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="600" Loaded="Window_Loaded">
+    <!-- 
+  ///////////////////////////////////////////////////////////////////////
+  // MainWindow.xaml - ClientGUI for Project4                          //
+  // Ver 1.1                                                           //
+  // Vikrant Bhopatrao, CSE687 - Object Oriented Design, Spring 2018   //
+  ///////////////////////////////////////////////////////////////////////
+  -->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="133*"/>
+            <ColumnDefinition Width="461*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.4,17.2">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Browse"/>
+                <Separator/>
+                <MenuItem Header="_Exit"/>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+            </MenuItem>
+            <MenuItem Header="_Connect">
+            </MenuItem>
+            <MenuItem Header="_Help">
+            </MenuItem>
+        </Menu>
+
+        <TabControl Name="tabControl" Grid.ColumnSpan="2" Margin="0,18,-0.4,2.8" Grid.RowSpan="2">
+            <TabItem Name="Connect" Header="Connect">
+                <Grid Background="#ccc">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="AddressTextBlock" Width="60" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Address:</TextBlock>
+                        <TextBox Name="AddressTextBox" Width="100" Height="20" Margin="20 0 5 0" >localhost</TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="PortTextBlock" Width="60" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Port:</TextBlock>
+                        <TextBox Name="PortTextBox" Width="100" Height="20" Margin="20 0 5 0" >8082</TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button  Name="Connect_Button"  Margin="0 30 0 0" Width="100" Click="Connect_Button_Click">Connect</Button>
+                        <Button Name="Disconnect_Button" IsEnabled="False" Margin="30 30 0 0" Width="100" Click="Disconnect_Button_Click">Disconnect</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="CheckIn" Header="Check-In">
+                <Grid Background="#ccc">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="50"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="70"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="SelectFileBlock" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Width="200">Select File:</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="280">
+                            <Button Name="browse_button" IsEnabled="False" Margin="0 5 0 5" Width="60" Height="20" Click="SelectFile_Button_Click">Browse</Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="200">
+                            <TextBlock x:Name="FileNameBlock" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">FileName:</TextBlock>
+                            <TextBlock FontSize="10" >(Including Namespaces)</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="280">
+                            <TextBox Name="FileNameBox" Width="150" Height="20"></TextBox>
+                            <TextBlock FontSize="10"  VerticalAlignment="Center" Margin="10 0 0 0">( eg. ns1::ns2::filename.ext )</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="DescripBlock" Width="200" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Description:</TextBlock>
+                        <TextBox Name="DescripBox" TextWrapping="Wrap"  AcceptsReturn="True" VerticalScrollBarVisibility="Visible" Width="280" Height="60" Margin="0 0 0 0" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center" Width="200" >
+                            <TextBlock x:Name="CategoryBlock" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Category:</TextBlock>
+                            <TextBlock FontSize="10" >(Each category separated by a space)</TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="280">
+                            <TextBox Name="CategoryBox" Width="150" Height="20" ></TextBox>
+                            <TextBlock FontSize="10"  VerticalAlignment="Center" Margin="10 0 34 0">( eg. cat1 cat2 cat3 )</TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="StatusBlock" Width="200" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Status:</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="280">
+                            <ComboBox Name="StatusBox" Height="25" Margin="0 0 93 0">
+                                <ComboBoxItem IsSelected="True">Open</ComboBoxItem>
+                                <ComboBoxItem>Close</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="ChildrenBlock" Width="200" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Children:</TextBlock>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="280">
+                            <Button Name="children_button" IsEnabled="False" Margin="0,5,0,0" Width="60" Click="AddChildren_Button_Click" Height="20" VerticalAlignment="Top">Add</Button>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="addAnotherFile_button" IsEnabled="False" Margin="0 30 50 0" FontStyle="Italic" FontWeight="Bold" Width="120" Click="addAnotherFile_Button_Click">Add Another File</Button>
+                        <Button Name="checkin_button" IsEnabled="False" Margin="50 30 0 0" FontStyle="Italic" FontWeight="Bold" Width="100" Click="CheckIn_Button_Click">Check-In File</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="CheckOut" Header="Check-Out">
+                <Grid Background="#ccc">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="COFileKeyBlock" Width="90" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">FileKey:</TextBlock>
+                        <TextBox Name="COFileKeyBox" Width="150" Height="20" Margin="20 0 0 0" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="COFilePathBlock" Width="90" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Destination:</TextBlock>
+                        <Button Name="savePath_button" IsEnabled="False" Margin="20 5 90 5" Width="60" Click="SelectPath_Button_Click">Browse</Button>
+                    </StackPanel>
+                    <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="checkout_button" IsEnabled="False" Margin="0 30 0 0" FontStyle="Italic" FontWeight="Bold" Width="100" Click="CheckOut_Button_Click">Check-Out File</Button>
+                    </StackPanel>
+                    <CheckBox Grid.Row="3" x:Name="includeDependencies" HorizontalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="DemiBold">Include Dependencies</CheckBox>
+                </Grid>
+            </TabItem>
+            <TabItem Name="Browse" Header="Browse">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="5"></RowDefinition>
+                        <RowDefinition Height="1.3*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" Background="#ccc">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <TextBlock x:Name="filenameQuery" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">FileName</TextBlock>
+                            <TextBox Name="filenameQuery_txt" Width="60" Height="20" Margin="10 0 0 0"></TextBox>
+
+                            <TextBlock x:Name="dependencyQuery" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="10 0 0 0" >Dependencies</TextBlock>
+                            <TextBox Name="dependencyQuery_txt" Margin="10 0 0 0" Width="60" Height="20"></TextBox>
+                            <TextBlock x:Name="categoryQuery" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="10 0 0 0">Category</TextBlock>
+                            <TextBox Name="categoryQuery_txt" Margin="10 0 0 0" Width="60" Height="20"></TextBox>
+
+                            <TextBlock x:Name="versionQuery" VerticalAlignment="Center" FontSize="14" FontWeight="Bold" Margin="10 0 0 0">Version</TextBlock>
+                            <TextBox Name="versionQuery_txt" Margin="10 0 0 0" Width="60" Height="20"></TextBox>
+                        </StackPanel>
+                    </Grid>
+
+                    <Grid Grid.Row="1" Background="#ccc">
+                        <CheckBox x:Name="noDependants" HorizontalAlignment="Center" VerticalContentAlignment="Center" FontSize="14" FontWeight="DemiBold">No Dependants</CheckBox>
+                    </Grid>
+                    <Grid Grid.Row="2" Background="#ccc">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Name="unionQuery_button" IsEnabled="False" Margin="0 10 0 0" Width="150" Click="unionQuery_Button_Click">Union Another Query</Button>
+                                <Button Name="andQuery_button" IsEnabled="False" Margin="50 10 0 0" Width="150" Click="andQuery_Button_Click">And Another Query</Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="3" Background="#ccc">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Button Name="searchDatabase_button" IsEnabled="False" Margin="0 10 0 0" Width="100" Click="searchDatabase_Button_Click">SearchDatabase</Button>
+                            <Button Name="cancelSearch_button" IsEnabled="False" Margin="50 10 0 0" Width="100" Click="cancelSearch_Button_Click">Cancel Search</Button>
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="4" Background="#ccc">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <TextBlock DockPanel.Dock="Left" Margin="10 0" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">Dirs</TextBlock>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1">
+                            <Label Width="40" Height="30" Margin="10 0 5 0" DockPanel.Dock="Right">Path</Label>
+                            <TextBlock x:Name="PathTextBlock" DockPanel.Dock="Left" Padding="10 0" Margin="12 0" VerticalAlignment="Center" FontSize="14" FontWeight="Normal" Background="#fff">path</TextBlock>
+                        </DockPanel>
+
+                        <Border Grid.Row="2" BorderThickness="10,0,10,10" Background="#000">
+                            <ListBox IsEnabled="False" x:Name="DirList" MouseDoubleClick="DirList_MouseDoubleClick"></ListBox>
+                        </Border>
+                    </Grid>
+                    <GridSplitter Grid.Row="5" Grid.ColumnSpan="3" Height="5" HorizontalAlignment="Stretch" Background="#666"></GridSplitter>
+                    <Grid Grid.Row="6" Background="#ccc">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="10"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Padding="10 10" FontWeight="Bold" FontSize="14">Files</TextBlock>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="2" Margin="10 0 0 0">
+                                <TextBlock  FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Key</TextBlock>
+                            </Border>
+                            <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="2" Margin="0 0 10 0">
+                                <TextBlock  FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">FileName</TextBlock>
+                            </Border>
+                        </Grid>
+                        <Border Grid.Row="2" BorderThickness="10 0 10 10" Background="#000">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <ListBox Grid.Column="0" IsEnabled="False" SelectionChanged="KeyList_SelectionChanged" x:Name="KeyList" MouseDoubleClick="FileList_MouseDoubleClick" ScrollViewer.ScrollChanged="keys_ScrollChanged">
+                                </ListBox>
+
+
+                                <ListBox  Grid.Column="1" IsEnabled="False" SelectionChanged="FileList_SelectionChanged" x:Name="FileList" MouseDoubleClick="FileList_MouseDoubleClick" ScrollViewer.ScrollChanged="files_ScrollChanged">
+                                </ListBox>
+
+                            </Grid>
+
+                        </Border>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Name="ViewFile" Header="View File">
+                <Grid Background="#ccc">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="30"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock x:Name="VFileKeyBlock" Width="90" VerticalAlignment="Center" FontSize="14" FontWeight="Bold">FileKey:</TextBlock>
+                        <TextBox Name="VFileKeyBox" Width="150" Height="20" Margin="20 0 0 0" ></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="viewfile_button" IsEnabled="False" Margin="0 30 0 0" FontStyle="Italic" FontWeight="Bold" Width="100" Click="ViewFile_Button_Click">View File Text</Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="ViewMeta" Header="View Metadata">
+                <Grid Background="#ccc">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="300"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock x:Name="VMFileKeyBlock" FontSize="14" FontWeight="Bold">FileKey:</TextBlock>
+                        <TextBox Name="VMFileKeyBox" Margin="0 20 0 0" ></TextBox>
+                        <Button Name="viewdata_button" IsEnabled="False" Margin="0 20 50 0" FontStyle="Italic" FontWeight="Bold" Click="ViewMetadata_Button_Click">View Metadata</Button>
+                    </StackPanel>
+                    <Border Grid.Column="3" Margin="0 80 0 80" BorderThickness="2" BorderBrush="DarkGray">
+                        <TextBlock Background="White" Name="MetadataText" TextWrapping="Wrap">Metadata:</TextBlock>
+                    </Border>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <ScrollViewer Name="statusScroll" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto" CanContentScroll="True" Grid.ColumnSpan="2" Margin="0,526.8,-0.4,0.4" Grid.RowSpan="2">
+            <TextBlock Name="statusBarText" TextWrapping="Wrap">Status:</TextBlock>
+        </ScrollViewer>
+    </Grid>
+</Window>
